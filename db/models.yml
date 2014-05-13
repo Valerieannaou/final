@@ -1,3 +1,24 @@
+Chocolatier:
+    - name: string
+    - logo_url: string
+    - address: text
+    
+Chocolate:
+    - name: string
+    - chocolatier_id: integer
+    - photo_url: string
+    
+Review:
+   - chocolate_id: integer
+   - chocolatier_id: integer
+   - rating: integer
+   - comment: text 
+   
+User:
+    - review_id: integer
+    
+
+
 # Example table for a typical Book model.
 #
 # Book:
