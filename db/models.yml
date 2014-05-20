@@ -16,6 +16,8 @@ Review:
    
 User:
     - review_id: integer
+    - name: string
+    - password: string
     
 
 
