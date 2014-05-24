@@ -7,17 +7,21 @@ Chocolate:
     - name: string
     - chocolatier_id: integer
     - photo_url: string
+    - kind: string
     
 Review:
+   - user_id: integer
    - chocolate_id: integer
    - chocolatier_id: integer
    - rating: integer
-   - comment: text 
+   - comment: text
+   - created_at: datetime 
    
 User:
     - review_id: integer
     - name: string
     - password: string
+    - username: string
     
 
 
