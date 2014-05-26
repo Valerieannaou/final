@@ -1,13 +1,15 @@
 Chocolatier:
     - name: string
     - logo_url: string
-    - address: text
+    - website_url: string
     
 Chocolate:
     - name: string
+    - description: text
     - chocolatier_id: integer
     - photo_url: string
-    - kind: string
+    - type_id: integer
+    - category_id: integer
     
 Review:
    - user_id: integer
@@ -22,6 +24,14 @@ User:
     - name: string
     - password: string
     - username: string
+    
+Type:
+    - name: string
+    - photo_ur:string
+    
+Category:
+    - name: string
+    - photo_url: string
     
 
 
