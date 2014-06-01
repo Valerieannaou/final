@@ -1,4 +1,4 @@
-class ChocolatiersController < ApplicationController
+class ChocolatierController < ApplicationController
 
   # Try commenting out or removing this code entirely
   # to see what would happen.

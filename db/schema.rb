@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140526041523) do
+ActiveRecord::Schema.define(version: 20140527005629) do
 
   create_table "categories", force: true do |t|
     t.string "name"
@@ -31,12 +31,12 @@ ActiveRecord::Schema.define(version: 20140526041523) do
     t.string "name"
     t.string "logo_url"
     t.string "website_url"
+    t.string "origin"
   end
 
   create_table "reviews", force: true do |t|
     t.integer  "user_id"
     t.integer  "chocolate_id"
-    t.integer  "chocolatier_id"
     t.integer  "rating"
     t.text     "comment"
     t.datetime "created_at"
@@ -44,14 +44,13 @@ ActiveRecord::Schema.define(version: 20140526041523) do
 
   create_table "types", force: true do |t|
     t.string "name"
-    t.string "photo_ur:string"
+    t.string "photo_url"
   end
 
   create_table "users", force: true do |t|
-    t.integer "review_id"
-    t.string  "name"
-    t.string  "password"
-    t.string  "username"
+    t.string "name"
+    t.string "password"
+    t.string "username"
   end
 
 end

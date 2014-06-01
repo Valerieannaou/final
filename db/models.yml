@@ -1,49 +1,34 @@
-Chocolatier:
-    - name: string
-    - logo_url: string
-    - website_url: string
-    
-Chocolate:
-    - name: string
-    - description: text
-    - chocolatier_id: integer
-    - photo_url: string
-    - type_id: integer
-    - category_id: integer
-    
-Review:
-   - user_id: integer
-   - chocolate_id: integer
-   - chocolatier_id: integer
-   - rating: integer
-   - comment: text
-   - created_at: datetime 
-   
 User:
-    - review_id: integer
-    - name: string
-    - password: string
-    - username: string
-    
+  - username: string
+  - password: string
+  - name: string
+
+Review:
+  - user_id: integer
+  - chocolate_id: integer
+  - rating: integer
+  - comment: text
+  - created_at: datetime
+
+Chocolate:
+  - name: string
+  - description: text
+  - photo_url: string
+  - chocolatier_id: integer
+  - type_id: integer
+  - category_id: integer
+
+Chocolatier:
+  - name: string
+  - logo_url: string
+  - origin: string
+  - website_url: string
+
 Type:
-    - name: string
-    - photo_ur:string
-    
+  - name: string
+  - photo_url: string
+
 Category:
-    - name: string
-    - photo_url: string
-    
+  - name: string
+  - photo_url: string
 
-
-# Example table for a typical Book model.
-#
-# Book:
-#   - title: string
-#   - price: integer
-#   - author: string
-#   - summary: text
-#   - hardcover: boolean
-#
-# Follow the syntax exactly (colons and spacing are important).
-# Column type choices are: string, text, integer, and boolean.
-# You can have as many models as you want in this file.

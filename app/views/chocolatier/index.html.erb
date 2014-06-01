@@ -1,0 +1,25 @@
+
+<% all_chocolatiers = Chocolatier.read %>
+
+<h2>Chocolatiers</h2>
+
+<%= link_to "Add a New Chocolatier", "/chocolatier/new" %>
+
+<ul>
+
+  <% all_chocolatiers.each do |chocolatier| %>
+
+    <li>
+      <%= link_to chocolatier["name"], "/chocolatier/#{chocolatier["id"]}" %>
+      (<%= link_to "Delete", "/chocolatier/#{chocolatier["id"]}", "method" => "delete" %>)
+      (<%= link_to "Edit", "/chocolatier/#{chocolatier["id"]}/edit" %>)
+    </li>
+
+  <% end %>
+
+</ul>
+
+<% all_chocolatiers.each do |chocolatier| %>
+  <%= image_tag chocolatier["logo_url"], "width" => "120" %>
+<% end %>
+

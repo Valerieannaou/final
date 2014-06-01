@@ -1,0 +1,32 @@
+<h1>Chocolatiers</h1>
+
+<p>
+  <%= link_to "Chocolate", "/chocolate" %> |
+  <%= link_to "Chocolatier", "/chocolatier" %>
+</p>
+
+<hr>
+
+<% the_id = params["id"] %>
+<% the_chocolatier = Chocolatier.read(the_id) %>
+<% chocolate = Chocolate.where("chocolatier_id" => the_chocolatier["id"]) %>
+
+<h2>Chocolatier: <%= the_chocolatier["name"] %></h2>
+
+<h4>Chocolates</h4>
+
+<ul>
+
+  <% chocolate.each do |chocolate| %>
+
+    <li>
+      <strong><%= chocolate["name"] %></strong>
+    </li>
+
+  <% end %>
+
+</ul>
+
+<% chocolate.each do |chocolate| %>
+  <img src="<%= chocolate["photo_url"] %>" width="120">
+<% end %>

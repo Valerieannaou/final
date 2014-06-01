@@ -1,1 +1,56 @@
 <h1> Chocolate List </h1>
+
+
+<div class="row">
+  <div class="col-md-2 col-md-offset-10">
+    <%= link_to "Add a New Chocolate", "/chocolate/new", "class" => 'btn btn-lg btn-primary' %>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col-md-8">
+
+    <% Chocolate.read.order("name desc").each do |chocolate| %>
+
+      <div class="row movie">
+
+        <div class="col-md-4">
+          <%= link_to image_tag(chocolate["photo_url"]), "/chocolate/#{chocolate["id"]}" %>
+        </div>
+
+        <div class="col-md-8">
+          <h2>
+            <%= link_to chocolate["name"], "/chocolate/#{chocolate["id"]}" %>
+          </h2>
+         
+
+          <% chocolatier = Chocolatier.find_by("id" => chocolate["chocolatier_id"]) %>
+          <% if chocolatier.present? %>
+            <p>Made by: <%= chocolatier["name"] %></p>
+          <% end %>
+        </div>
+
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-md-4 well aside">
+    <h2>Did You Know...</h2>
+
+    <ul>
+      <li>We have <%= Chocolate.count %> chocolates and <%= Chocolatier.count %> chocolatiers in our database.</li>
+
+      <li>
+        <% random_chocolatier = Chocolatier.sample %>
+        <% number_of_chocolates = Chocolate.where(:chocolatier_id => random_chocolatier["id"]).count %>
+        <%= random_chocolatier["name"] %>
+        has
+        <%= pluralize(number_of_chocolates, "chocolate") %> in our database.
+      </li>
+
+    </ul>
+
+  </div>
+
+</div>

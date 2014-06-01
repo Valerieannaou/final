@@ -1,0 +1,64 @@
+<% chocolate_id = params["id"] %>
+<% chocolate = Chocolate.read(chocolate_id) %>
+
+<div class="row">
+
+  <div class="col-md-4">
+    <%= image_tag(chocolate["photo_url"]) %>
+  </div>
+
+  <div class="col-md-8">
+    <h1><%= chocolate["name"] %>
+   
+    </h1>
+    <% avg = Review.where("chocolate_id" => chocolate["id"]).average(:rating).to_i %>
+    <h4>Avg Rating:
+      <% avg.times do %>
+        &star;
+      <% end %>
+    </h4>
+
+
+    <% chocolatier = Chocolatier.find_by("id" => chocolate["chocolatier_id"]) %>
+    <% if chocolatier.present? %>
+      <h4>Made by <%= link_to chocolatier["name"], "/chocolatiers/#{chocolatier["id"]}" %></h4>
+    <% end %>
+
+    <h2>Customer Reviews</h2>
+
+    <% if Review.where("chocolate_id" => chocolate["id"]).count == 0 %>
+      <p>Be the first to add a review!</p>
+    <% end %>
+
+    <%= form_tag "/reviews" do %>
+
+      <%= hidden_field_tag "chocolate_id", chocolate["id"] %>
+
+      <div class="form-group">
+        <%= label_tag :rating %>
+        <%= select_tag :rating, options_for_select(['5 stars','4 stars','3 stars','2 stars','1 star']) %>
+        <%= text_area_tag :content, "", "class" => "form-control", "placeholder" => "What did you think about this chocolate?", "rows" => 4 %>
+      </div>
+
+      <%= submit_tag "Add Review", "class" => "btn btn-md btn-primary" %>
+    <% end %>
+
+    <% Review.where("chocolate_id" => chocolate["id"]).each do |review| %>
+      <% the_user = User.find_by("id" => review["user_id"]) %>
+      <div class="review row">
+        <div class="col-md-3">
+          <p class="lead"><%= review.rating %> stars out of 5</p>
+          <% if the_user.present? %>
+            <p>by <%= the_user["name"] %></p>
+          <% end %>
+        </div>
+        <div class="col-md-9">
+          <p class="lead"><%= review.content %></p>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>
+
+

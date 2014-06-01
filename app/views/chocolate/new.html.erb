@@ -1,0 +1,33 @@
+<div class="page-header">
+  <h1>Add a New Chocolate</h1>
+</div>
+
+<div class="row">
+  <div class="col-md-5">
+
+    <%= form_tag "/chocolate", "method" => "post"  %>
+
+      <div class="form-group">
+        <%= label_tag "title", "What is the name of the chocolate?" %>
+        <%= text_field_tag "title", "", "class" => "form-control" %>
+      </div>
+
+
+      <div class="form-group">
+        <%= label_tag "year", "Link to a poster image" %>
+        <%= text_field_tag "url", "", "class" => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag "chosen_chocolatier_id", "Choose a Chocolatier:" %>
+        <%= select_tag "chosen_chocolatier_id",
+                       options_from_collection_for_select(Chocolatier.read.order("name"),
+                        "id",
+                        "name"), "class" => "form-control" %>
+      </div>
+
+      <%= submit_tag "Add This Chocolate", "class" => "btn btn-lg btn-success" %> or <%= link_to "Cancel", "/chocolate" %>
+
+    </form>
+</div>
+</div>

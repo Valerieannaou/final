@@ -2,11 +2,45 @@
 <html>
 <head>
   <title>Final</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
+	<%= stylesheet_link_tag    "http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" %>
+
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+  <div class="container">
+    <div class="header">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>ChocolateRaters</h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <%= link_to "Chocolates", "/chocolate", "class" => "item-link"  %> |
+          <%= link_to "Chocolatiers", "/chocolatier" %>
+        </div>
+        <div class="pull-right">
+          <% user = User.find_by("id" => cookies["user_id"]) %>
+          <% if user.present? %>
+            <%= user["name"] %>
+            <%= link_to "My Profile", "/users/#{user["id"]}" %> |
+            <%= link_to "Sign Out", '/logout' %>
+          <% else %>
+            <%= link_to "Sign Up", '/users/new' %> |
+            <%= link_to "Sign In", '/login' %>
+          <% end %>
+        </div>
+      </div>
+      <hr>
+      <h4 class="text-warning"><%= notice %></h4>
+    </div>
+
 
 <%= yield %>
 
