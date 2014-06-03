@@ -1,6 +1,6 @@
 User.delete_all
 tricia = User.create("username" => "tricia", "password" => "chocolate", "name" => "Tricia Torres")
-val = User.create("username" => "val", "password" => "cacao", "name" => "Valerie Meyers")
+val = User.create("username" => "val", "password" => "cacao", "name" => "Valerie Myers")
 
 Type.delete_all
 white = Type.create("name" => "White Chocolate", "photo_url" => "http://mobile-cuisine.com/wp-content/uploads/2011/09/White-Chocolate.jpg")

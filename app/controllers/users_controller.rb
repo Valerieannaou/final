@@ -1,6 +1,17 @@
 class UsersController < ApplicationController
 
+  def show
+     @user = User.find_by("id" => params["id"])
 
+     logger.debug @user["id"].inspect
+     logger.debug cookies["user_id"].inspect
+
+     if (@user["id"] != cookies["user_id"].to_i)
+       redirect_to "/", :notice => "Nice try!"
+     end
+
+   end
+   
   def create
     existing_user = User.find_by("username" => params["username"])
 
