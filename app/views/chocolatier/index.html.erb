@@ -1,25 +1,37 @@
+<div class="row">
+  <div class="col-md-2 col-md-offset-10">
+    <%= link_to "Add a Chocolatier", "/chocolatiers/new", "class" => 'btn btn-lg btn-primary' %>
+  </div>
+</div>
 
-<% all_chocolatiers = Chocolatier.read %>
+<div class="row">
 
-<h2>Chocolatiers</h2>
+  <div class="col-md-8">
 
-<%= link_to "Add a New Chocolatier", "/chocolatier/new" %>
+    <% Chocolatier.read.order("name").each do |chocolatier| %>
 
-<ul>
+      <div class="row chocolate">
 
-  <% all_chocolatiers.each do |chocolatier| %>
+        <div class="col-md-4">
+          <%= link_to image_tag(chocolatier["logo_url"], "class" => "indeximage"), "/chocolatiers/#{chocolatier["id"]}" %>
+        </div>
 
-    <li>
-      <%= link_to chocolatier["name"], "/chocolatier/#{chocolatier["id"]}" %>
-      (<%= link_to "Delete", "/chocolatier/#{chocolatier["id"]}", "method" => "delete" %>)
-      (<%= link_to "Edit", "/chocolatier/#{chocolatier["id"]}/edit" %>)
-    </li>
+        <div class="col-md-8">
+          <h2>
+            <%= link_to chocolatier["name"], "/chocolatiers/#{chocolatier["id"]}" %>
+          </h2>
+          <p>Origin: <%= chocolatier["origin"] %></p>
+          <p>Website: <%= link_to chocolatier["website_url"], chocolatier["website_url"] %></p>
 
-  <% end %>
+          <p>
+          <%= link_to "Edit", "/chocolatiers/#{chocolatier["id"]}/edit" %> |
+          <%= link_to "Delete", "/chocolatiers/#{chocolatier["id"]}", "method" => "delete", data: { confirm: 'Are you sure?' }  %>
+          </p>
 
-</ul>
+        </div>
 
-<% all_chocolatiers.each do |chocolatier| %>
-  <%= image_tag chocolatier["logo_url"], "width" => "120" %>
-<% end %>
+      </div>
+    <% end %>
+  </div>
 
+</div>

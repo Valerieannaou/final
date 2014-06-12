@@ -1,0 +1,26 @@
+<% category_id = params["id"] %>
+<% category = Category.read(category_id) %>
+
+<div class="row">
+
+  <div class="col-md-4">
+    <%= image_tag(category["photo_url"], "class" => "indeximage") %>
+  </div>
+
+  <div class="col-md-8">
+    <h1>Recommendations</h1>
+    <% chocolates = Chocolate.where("category_id" => category["id"]) %>
+    <ul>
+      <% chocolates.each do |chocolate| %>
+        <li>
+          <%= link_to chocolate["name"], "/chocolates/#{chocolate["id"]}" %>
+        </li>
+      <% end %>
+    </ul>
+
+<% chocolates.each do |chocolate| %>
+  <%= link_to image_tag(chocolate["photo_url"], "class" => "showimage"), "/chocolates/#{chocolate["id"]}" %>
+<% end %>
+
+  </div>
+</div>

@@ -1,32 +1,33 @@
-<h1>Chocolatiers</h1>
+<% chocolatier_id = params["id"] %>
+<% chocolatier = Chocolatier.read(chocolatier_id) %>
 
-<p>
-  <%= link_to "Chocolate", "/chocolate" %> |
-  <%= link_to "Chocolatier", "/chocolatier" %>
-</p>
+<div class="row">
 
-<hr>
+  <div class="col-md-4">
+    <%= image_tag(chocolatier["logo_url"], "class" => "indeximage") %>
+  </div>
 
-<% the_id = params["id"] %>
-<% the_chocolatier = Chocolatier.read(the_id) %>
-<% chocolate = Chocolate.where("chocolatier_id" => the_chocolatier["id"]) %>
+  <div class="col-md-8">
+    <h1><%= chocolatier["name"] %>
+      <h4><small>
+      <p>Origin: <%= chocolatier["origin"] %></p>
+      <p>Company Website: <%= link_to chocolatier["website_url"], chocolatier["website_url"] %></p>
+      </small></h4>
+    </h1>
 
-<h2>Chocolatier: <%= the_chocolatier["name"] %></h2>
+    <h3>Chocolate Creations</h3>
+    <% chocolates = Chocolate.where("chocolatier_id" => chocolatier["id"]) %>
+    <ul>
+      <% chocolates.each do |chocolate| %>
+        <li>
+          <%= link_to chocolate["name"], "/chocolates/#{chocolate["id"]}" %>
+        </li>
+      <% end %>
+    </ul>
 
-<h4>Chocolates</h4>
-
-<ul>
-
-  <% chocolate.each do |chocolate| %>
-
-    <li>
-      <strong><%= chocolate["name"] %></strong>
-    </li>
-
-  <% end %>
-
-</ul>
-
-<% chocolate.each do |chocolate| %>
-  <img src="<%= chocolate["photo_url"] %>" width="120">
+<% chocolates.each do |chocolate| %>
+  <%= link_to image_tag(chocolate["photo_url"], "class" => "showimage"), "/chocolates/#{chocolate["id"]}" %>
 <% end %>
+
+  </div>
+</div>

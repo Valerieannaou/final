@@ -1,14 +1,28 @@
 Final::Application.routes.draw do
-  
-  # Specify a custom home page
+
+  # Home page
   get "/" => "chocolate#index"
 
 
   # Sign-In and Sign-Out
-
-  get "/logout" => 'sessions#logout'
   get "/login" => 'sessions#login'
   post "/authenticate" => 'sessions#authenticate'
+  get "/logout" => 'sessions#logout'
+
+  # Resource: Users
+
+  # --- Create
+  get "/users/new" => 'users#new'
+  post "/users" => 'users#create'
+
+  # --- Read
+  get "/users" => 'users#index'
+  get "/users/:id" => 'users#show'
+
+  # -- Update
+  get "/users/:id/edit" => 'users#edit'
+  patch "/users/:id" => 'users#update'
+
 
   # Resource: Reviews
 
@@ -28,68 +42,58 @@ Final::Application.routes.draw do
   delete "/reviews/:id" => 'reviews#destroy'
 
 
-
-  # Resource: Users
-
-  # --- Create
-  get "/users/new" => 'users#new'
-  post "/users" => 'users#create'
-
-  # --- Read
-  get "/users" => 'users#index'
-  get "/users/:id" => 'users#show'
-
-  # -- Update
-  get "/users/:id/edit" => 'users#edit'
-  patch "/users/:id" => 'users#update'
-
-  # --- Delete
-  delete "/users/:id" => 'users#destroy'
-
-
-
   # Resource: Chocolates
 
   # --- Create
-  get "/chocolate/new" => 'chocolate#new'
-  post "/chocolate" => 'chocolate#create'
+  get "/chocolatiers/:chocolatier_id/chocolates/new" => 'chocolates#new'
+  post "/chocolatiers/:chocolatier_id/chocolates" => 'chocolates#create'
 
   # --- Read
-  get "/chocolate" => 'chocolate#index'
-  get "/chocolate/:id" => 'chocolate#show'
+  get "/chocolates" => 'chocolates#index'
+  get "/chocolates/:id" => 'chocolates#show'
 
   # -- Update
-  get "/chocolate/:id/edit" => 'chocolate#edit'
-  patch "/chocolate/:id" => 'chocolate#update'
+  get "/chocolatiers/:chocolatier_id/chocolates/:id/edit" => 'chocolates#edit'
+  patch "/chocolatiers/:chocolatier_id/chocolates/:id" => 'chocolates#update'
 
   # --- Delete
-  delete "/chocolate/:id" => 'chocolate#destroy'
-
+  delete "/chocolatiers/:chocolatier_id/chocolates/:id" => 'chocolates#destroy'
 
 
   # Resource: Chocolatiers
 
   # --- Create
-  get "/chocolatier/new" => 'chocolatier#new'
-  post "/chocolatier" => 'chocolatier#create'
+  get "/chocolatiers/new" => 'chocolatiers#new'
+  post "/chocolatiers" => 'chocolatiers#create'
 
   # --- Read
-  get "/chocolatier" => 'chocolatier#index'
-  get "/chocolatier/:id" => 'chocolatier#show'
+  get "/chocolatiers" => 'chocolatiers#index'
+  get "/chocolatiers/:id" => 'chocolatiers#show'
 
   # -- Update
-  get "/chocolatier/:id/edit" => 'chocolatier#edit'
-  patch "/chocolatier/:id" => 'chocolatier#update'
+  get "/chocolatiers/:id/edit" => 'chocolatiers#edit'
+  patch "/chocolatiers/:id" => 'chocolatiers#update'
 
   # --- Delete
-  delete "/chocolatier/:id" => 'chocolatier#destroy'
+  delete "/chocolatiers/:id" => 'chocolatiers#destroy'
 
 
-end
-  
-  
-  
-  
+  # Resource: Type
+
+  # --- Read
+  get "/type" => 'type#index'
+  get "/type/:id" => 'type#show'
+
+
+  # Resource: Category
+
+  # --- Read
+  get "/category" => 'category#index'
+  get "/category/:id" => 'category#show'
+
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -144,3 +148,6 @@ end
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+end
+  
+  

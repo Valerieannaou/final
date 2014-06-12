@@ -4,27 +4,39 @@
 <div class="row">
 
   <div class="col-md-4">
-    <%= image_tag(chocolate["photo_url"]) %>
+    <%= image_tag(chocolate["photo_url"], "class" => "indeximage") %>
   </div>
 
   <div class="col-md-8">
     <h1><%= chocolate["name"] %>
-   
+      <% type = Type.find_by("id" => chocolate["type_id"]) %>
+      <% category = Category.find_by("id" => chocolate["category_id"]) %>
+        <h4><small>
+          <% if type.present? %>
+            <p>Type: <%= type["name"] %></p>
+          <% end %>
+          <% if category.present? %>
+            <p>Category: <%= category["name"] %></p>
+          <% end %>
+        </small></h4>
     </h1>
     <% avg = Review.where("chocolate_id" => chocolate["id"]).average(:rating).to_i %>
-    <h4>Avg Rating:
+    <h4>Average Rating:
       <% avg.times do %>
         &star;
       <% end %>
     </h4>
 
-
     <% chocolatier = Chocolatier.find_by("id" => chocolate["chocolatier_id"]) %>
     <% if chocolatier.present? %>
-      <h4>Made by <%= link_to chocolatier["name"], "/chocolatiers/#{chocolatier["id"]}" %></h4>
+      <h4>Made by: <%= link_to chocolatier["name"], "/chocolatiers/#{chocolatier["id"]}" %></h4>
     <% end %>
 
-    <h2>Customer Reviews</h2>
+    <h3>Description</h3>
+
+    <%= chocolate["description"] %>
+
+    <h3>Customer Reviews</h3>
 
     <% if Review.where("chocolate_id" => chocolate["id"]).count == 0 %>
       <p>Be the first to add a review!</p>
@@ -37,7 +49,7 @@
       <div class="form-group">
         <%= label_tag :rating %>
         <%= select_tag :rating, options_for_select(['5 stars','4 stars','3 stars','2 stars','1 star']) %>
-        <%= text_area_tag :content, "", "class" => "form-control", "placeholder" => "What did you think about this chocolate?", "rows" => 4 %>
+        <%= text_area_tag :content, "", "class" => "form-control", "placeholder" => "Say something to make my sweet tooth water!", "rows" => 4 %>
       </div>
 
       <%= submit_tag "Add Review", "class" => "btn btn-md btn-primary" %>
@@ -53,12 +65,10 @@
           <% end %>
         </div>
         <div class="col-md-9">
-          <p class="lead"><%= review.content %></p>
+          <p class="lead"><%= review.comment %></p>
         </div>
       </div>
     <% end %>
 
   </div>
 </div>
-
-

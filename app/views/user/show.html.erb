@@ -1,5 +1,11 @@
-<h1>My Profile</h1>
+<h2>My Profile</h2>
 
 <p>Name: <%= @user["name"] %></p>
 <p>Username: <%= @user["username"] %></p>
 <p>Password: <%= @user["password"] %></p>
+
+
+<% user_id = params["id"] %>
+<% user = User.read(user_id) %>
+
+<p><%= link_to "Edit", "/users/#{user["id"]}/edit" %></p>

@@ -1,18 +1,15 @@
-<div class="page-header">
-  <h1>Add a New Chocolate</h1>
-</div>
+<% chocolate = Chocolate.find_by("id" => params["id"]) %>
 
-<div class="row">
-  <div class="col-md-5">
+<h1>Edit Chocolate entry for <%= chocolate["name"] %></h1>
 
-    <%= form_tag "/chocolates", "method" => "post"  %>
+<%= form_tag "/chocolates/#{chocolate["id"]}", "method" => "patch"  %>
 
-      <div class="form-group">
-        <%= label_tag "name", "What is the name of the chocolate?" %>
-        <%= text_field_tag "name", "", "class" => "form-control" %>
-      </div>
+  <div class="form-group">
+    <%= label_tag "name", "What is the name of the chocolate?" %>
+    <%= text_field_tag "name", "", "class" => "form-control" %>
+  </div>
 
-      <div class="form-group">
+  <div class="form-group">
         <%= label_tag "description", "Description" %>
         <%= text_field_tag "description", "", "class" => "form-control" %>
       </div>
@@ -20,11 +17,6 @@
       <div class="form-group">
         <%= label_tag "photo", "Upload an image" %>
         <%= text_field_tag "url", "", "class" => "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= label_tag "chocolatier", "Who is made by?" %>
-        <%= text_field_tag "chocolatier", "", "class" => "form-control" %>
       </div>
 
       <div class="form-group">
@@ -43,8 +35,6 @@
                         "name"), "class" => "form-control" %>
       </div>
 
-      <%= submit_tag "Add This Chocolate", "class" => "btn btn-lg btn-success" %> or <%= link_to "Cancel", "/chcolates" %>
+      <%= submit_tag "Edit This Chocolate", "class" => "btn btn-lg btn-success" %> or <%= link_to "Cancel", "/chocolates/#{chocolate["id"]}" %>
 
     </form>
-</div>
-</div>
