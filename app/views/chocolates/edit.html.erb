@@ -19,6 +19,14 @@
         <%= text_field_tag "url", "", "class" => "form-control" %>
       </div>
 
+	  <div class="form-group">
+	    <%= label_tag "chosen_chocolatier_id", "Who is made by?" %>
+	    <%= select_tag "chosen_chocolatier_id",
+	                        options_from_collection_for_select(Chocolatier.read.order("name"),
+	                        "id",
+	                        "name"), "class" => "form-control" %>
+	  </div>
+
       <div class="form-group">
         <%= label_tag "chosen_type_id", "White, Milk, or Dark Chocolate?" %>
         <%= select_tag "chosen_type_id", options_from_collection_for_select(Type.read.order("name"), "id", "name"), "class" => "form-control" %>

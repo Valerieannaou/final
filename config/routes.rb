@@ -45,19 +45,19 @@ Final::Application.routes.draw do
   # Resource: Chocolates
 
   # --- Create
-  get "/chocolatiers/:chocolatier_id/chocolates/new" => 'chocolates#new'
-  post "/chocolatiers/:chocolatier_id/chocolates" => 'chocolates#create'
+  get "/chocolates/new" => 'chocolates#new'
+  post "/chocolates" => 'chocolates#create'
 
   # --- Read
   get "/chocolates" => 'chocolates#index'
   get "/chocolates/:id" => 'chocolates#show'
 
   # -- Update
-  get "/chocolatiers/:chocolatier_id/chocolates/:id/edit" => 'chocolates#edit'
-  patch "/chocolatiers/:chocolatier_id/chocolates/:id" => 'chocolates#update'
+  get "/chocolates/:id/edit" => 'chocolates#edit'
+  patch "/chocolates/:id" => 'chocolates#update'
 
   # --- Delete
-  delete "/chocolatiers/:chocolatier_id/chocolates/:id" => 'chocolates#destroy'
+  delete "/chocolates/:id" => 'chocolates#destroy'
 
 
   # Resource: Chocolatiers

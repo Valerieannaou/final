@@ -2,38 +2,43 @@ class ChocolatesController < ApplicationController
   def index
   end
   
-  def new
-    @chocolatier = Chocolatier.find(params[:chocolatier_id])
-    @chocolate = @chocolatier.chocolates.build
-  end
+  # def new
+  #   # @chocolatier = Chocolatier.find(params[:chocolatier_id])
+  #   @chocolate = @chocolatier.chocolates.build
+  # end
 
   def create
-    @chocolatier = Chocolatier.find(params[:chocolatier_id])
-    @chocolate = @chocolatier.chocolates.build(params[:chocolate])
+    @chocolate = Chocolate.create("name" => params["name"],
+                  "description" => params["description"],
+                  "chocolatier_id" => params["chosen_chocolatier_id"],
+                  "photo_url" => params["url"],
+                  "type_id" => params["chosen_type_id"],
+                  "category_id" => params["chosen_category_id"])
+                  
       if @chocolate.save
-        redirect_to "/chocolatiers/#{@chocolatier["id"]}/chocolates/#{@chocolate["id"]}"
+        redirect_to "/chocolates/#{@chocolate["id"]}"
       else
         render :action => "new"
       end
   end
 
   def edit
-    @chocolatier = Chocolatier.find(params[:chocolatier_id])
-    @chocolate = @chocolatier.chocolates.find(params[:id])
+    @chocolate = Chocolate.find(params[:id])
   end
 
   def update
-    @chocolatier = Chocolatier.find(params[:chocolatier_id])
     @chocolate = Chocolate.find(params[:id])
-      if @chocolate.update_attributes(params[:chocolate])
-        redirect_to "/chocolatiers/#{@chocolate["chocolatier_id"]}/chocolates/#{@chocolate["id"]}"
-      else
-        render :action => "edit"
-      end
+    @chocolate.update("name" => params["name"],
+                      "description" => params["description"],
+                      "photo_url" => params["url"],
+                      "chocolatier_id" => params["chosen_chocolatier_id"],
+                      "type_id" => params["chosen_type_id"],
+                      "category_id" => params["chosen_category_id"])
+                      
+      redirect_to "/chocolates/#{@chocolate["id"]}"
   end
 
   def destroy
-    @chocolatier = Chocolatier.find(params[:chocolatier_id])
     @chocolate = Chocolate.find(params[:id])
     @chocolate.destroy
     redirect_to "/chocolates"
