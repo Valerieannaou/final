@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
 def show
   @user = User.find_by("id" => params["id"])
-
+  
   logger.debug @user["id"].inspect
   logger.debug cookies["user_id"].inspect
 

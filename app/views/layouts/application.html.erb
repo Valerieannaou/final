@@ -25,15 +25,15 @@
           <div class="col-md-8">
             <%= link_to "Chocolates", "/chocolates", "class" => "item-link"  %> |
             <%= link_to "Chocolatiers", "/chocolatiers" %> |
-            <%= link_to "Types", "/type" %> |
-            <%= link_to "Categories", "/category" %>
+            <%= link_to "Types", "/types" %> |
+            <%= link_to "Categories", "/categories" %>
           </div>
 
           <div class="pull-right">
             <% user = User.find_by("id" => cookies["user_id"]) %>
             <% if user != nil %>
               <%= user["name"] %>
-              <%= link_to "My Profile", '/users/#{user["id"]}' %> |
+              <%= link_to "My Profile", '/users/' + user["id"].to_s %> |
               <%= link_to "Sign Out", '/logout' %>
             <% else %>
               <%= link_to "Sign Up", '/users/new' %> |

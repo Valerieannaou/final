@@ -7,12 +7,12 @@
       <div class="row chocolate">
 
         <div class="col-md-4">
-          <%= link_to image_tag(category["photo_url"], "class" => "indeximage"), "/category/#{category["id"]}" %>
+          <%= link_to image_tag(category["photo_url"], "class" => "indeximage"), "/categories/#{category["id"]}" %>
         </div>
 
         <div class="col-md-8">
           <h2>
-            <%= link_to category["name"], "/category/#{category["id"]}" %>
+            <%= link_to category["name"], "/categories/#{category["id"]}" %>
           </h2>
         </div>
 

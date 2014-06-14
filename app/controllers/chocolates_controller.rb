@@ -1,5 +1,7 @@
-class ChocolateController < ApplicationController
-
+class ChocolatesController < ApplicationController
+  def index
+  end
+  
   def new
     @chocolatier = Chocolatier.find(params[:chocolatier_id])
     @chocolate = @chocolatier.chocolates.build

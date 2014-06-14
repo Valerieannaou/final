@@ -1,4 +1,4 @@
-class ChocolatierController < ApplicationController
+class ChocolatiersController < ApplicationController
   
   def create
     Chocolatier.create("name" => params["name"],

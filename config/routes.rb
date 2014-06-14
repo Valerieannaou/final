@@ -1,7 +1,7 @@
 Final::Application.routes.draw do
 
   # Home page
-  get "/" => "chocolate#index"
+  get "/" => "chocolates#index"
 
 
   # Sign-In and Sign-Out
@@ -81,15 +81,15 @@ Final::Application.routes.draw do
   # Resource: Type
 
   # --- Read
-  get "/type" => 'type#index'
-  get "/type/:id" => 'type#show'
+  get "/types" => 'types#index'
+  get "/types/:id" => 'types#show'
 
 
   # Resource: Category
 
   # --- Read
-  get "/category" => 'category#index'
-  get "/category/:id" => 'category#show'
+  get "/categories" => 'categories#index'
+  get "/categories/:id" => 'categories#show'
 
 
 
